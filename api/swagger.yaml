@@ -1,0 +1,53 @@
+---
+swagger: "2.0"
+info:
+  description: "Remote Control TV API"
+  version: "1.0.0"
+  title: "Remote Control API"
+  contact:
+    email: "alan@alanmbarr.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/WatchTV/1.0.0"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /watch:
+    get:
+      summary: "list of watchable resources"
+      description:
+        "By passing in the appropriate options, you can search for\navailable\
+        \ inventory in the system\n"
+      operationId: "watchList"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "watchable items"
+        "400":
+          description: "bad input parameter"
+  /watch/{content}:
+    post:
+      summary: "choose watch"
+      description:
+        "By passing in the appropriate options, you can search for\navailable\
+        \ inventory in the system\n"
+      operationId: "watchTrigger"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "content"
+          in: "path"
+          description: "The id of the content to watch"
+          required: true
+          type: "string"
+          x-exportParamName: "Content"
+      responses:
+        "200":
+          description: "Action started"
+        "400":
+          description: "bad input parameter"
+definitions: {}
