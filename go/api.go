@@ -15,8 +15,10 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"strings"
 	"os"
+	"strings"
+
+	//not sure why
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/nats-io/nats.go"
 )
@@ -38,7 +40,7 @@ func WatchList(w http.ResponseWriter, r *http.Request) {
 	checkErr(err)
 
 	// query
-	rows, err := db.Query("SELECT name FROM content")
+	rows, err := db.Query("SELECT name FROM watchcontentscripts;")
 	checkErr(err)
 
 	var name string
