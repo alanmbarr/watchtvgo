@@ -24,7 +24,8 @@ endif
 build-all: $(PLATFORMS)
 
 $(PLATFORMS):
-	GOOS=$(os) GOARM=7 GOARCH=$(arch) CGO_ENABLED=0 $(BUILDCOMMAND) -o "bin/$(label)"
+	CC=arm-linux-gnueabihf-gcc CXX=arm-linux-gnueabihf-g++
+	GOOS=$(os) GOARM=7 GOARCH=$(arch) CGO_ENABLED=1 $(BUILDCOMMAND) -o "bin/$(label)"
 	$(SHACOMMAND) "bin/$(label)" > "bin/$(label).sha256"
 
 .PHONY: latest
