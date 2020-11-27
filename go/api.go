@@ -16,8 +16,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
-
-	//only using this here
+	"os"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/nats-io/nats.go"
 )
@@ -34,7 +33,8 @@ type ContentList []Content
 func WatchList(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	db, err := sql.Open("sqlite3", "./WatchTV.db")
+	home, err := os.UserHomeDir()
+	db, err := sql.Open("sqlite3", home+"/contentScript.db")
 	checkErr(err)
 
 	// query
