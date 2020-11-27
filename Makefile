@@ -10,6 +10,8 @@ temp = $(subst /, ,$@)
 os = $(word 1, $(temp))
 arch = $(word 2, $(temp))
 label = $(word 3, $(temp))
+cc = arm-linux-gnueabihf-gcc
+cxx = arm-linux-gnueabihf-g++
 
 UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
@@ -24,8 +26,7 @@ endif
 build-all: $(PLATFORMS)
 
 $(PLATFORMS):
-	CC=arm-linux-gnueabihf-gcc CXX=arm-linux-gnueabihf-g++
-	GOOS=$(os) GOARM=7 GOARCH=$(arch) CGO_ENABLED=1 $(BUILDCOMMAND) -o "bin/$(label)"
+	CC=$(cc) CXX=$(cxx) GOOS=$(os) GOARM=7 GOARCH=$(arch) CGO_ENABLED=1 $(BUILDCOMMAND) -o "bin/$(label)"
 	$(SHACOMMAND) "bin/$(label)" > "bin/$(label).sha256"
 
 .PHONY: latest
