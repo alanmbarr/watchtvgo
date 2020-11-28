@@ -127,6 +127,11 @@ go-clean:
 	@echo "  >  Cleaning build cache"
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go clean
 
+deploy:
+	@echo "  >  Deploying binary"
+	cp $(GOBIN)/watchtv-Linux-arm7 /home/ubuntu/WatchTVNext && mv -f /home/ubuntu/WatchTVNext/watchtv-Linux-arm7 /home/ubuntu/WatchTV/watchtv-Linux-arm7
+	sudo systemctl stop watchtvproject && sudo systemctl start watchtvproject
+
 .PHONY: help
 all: help
 help: Makefile
